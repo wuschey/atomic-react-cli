@@ -6,7 +6,7 @@ See [Atomic Design Documentation]  for further Information about this approach.
 [Atomic Design Documentation]: <http://bradfrost.com/blog/post/atomic-web-design/>
 
 
-#Todo
+# Todo
 
 - [ ] Extend Templates (props)
 - [ ] Adding Project Type (Normal vs. DDD)
