@@ -12,3 +12,8 @@ See [Atomic Design Documentation]  for further Information about this approach.
 - [ ] Adding Project Type (Normal vs. DDD)
 - [ ] Test
 - [ ] DocumentationJS
+
+# License
+
+MIT © Aminata Sidibe
+
