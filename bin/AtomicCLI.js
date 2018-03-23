@@ -2,10 +2,10 @@ const fs = require("fs-extra");
 const inquirer = require("inquirer");
 const chalk = require("chalk");
 const figlet = require("figlet");
-const path= require("path");
+const path = require("path");
 
-const questions = require ("./questions");
-const { PATH, TEMPLATES } = require("./config");
+const questions = require("./questions");
+const {PATH, TEMPLATES} = require("./config");
 
 const log = console.log;
 let config = {};
@@ -22,15 +22,15 @@ const setConfig = obj => {
 const atomic = () => {
   figlet("Atomic React Components", (err, data) => {
     log(data);
- console.log('questions' + questions);
-    inquirer.prompt(questions).then(answers => {
-      console.log('questions' + questions);
-      config = setConfig(answers);
+    inquirer
+      .prompt(questions)
+      .then(answers => {
+        config = setConfig(answers);
 
-      console.log(config);
+        // console.log(config);
 
-      checkIfComponentExists();
-    });
+        checkIfComponentExists();
+      });
   });
 };
 
@@ -40,17 +40,15 @@ const checkIfComponentExists = () => {
   const dir = config.outputFolder;
   const componentDir = dir + "/" + config.componentName;
 
-  fs.pathExists(componentDir).then(exists => {
-    if (!exists) {
-      createComponent();
-    } else {
-      log(
-        chalk.bgRed.white.bold(
-          "Component already exists - Please use another component name"
-        )
-      );
-    }
-  });
+  fs
+    .pathExists(componentDir)
+    .then(exists => {
+      if (!exists) {
+        createComponent();
+      } else {
+        log(chalk.bgRed.white.bold("Component already exists - Please use another component name"));
+      }
+    });
 };
 
 const createComponent = () => {
@@ -79,10 +77,10 @@ const writeComponentFile = (fileType, componentTemplate) => {
   let componentName = config.componentName;
   let filename = config.componentName;
 
-  if (componentTemplate == TEMPLATES.index) filename = "index";
-
-  const outputFile =
-    componentDir + "/" + componentName + "/" + filename + fileType;
+  if (componentTemplate == TEMPLATES.index) 
+    filename = "index";
+  
+  const outputFile = componentDir + "/" + componentName + "/" + filename + fileType;
 
   fs.readFile(componentTemplate, "utf8", (err, data) => {
     const result = data.replace(/COMPONENTNAME/g, componentName);
@@ -90,4 +88,6 @@ const writeComponentFile = (fileType, componentTemplate) => {
   });
 };
 
-module.exports =  {atomic};
+module.exports = {
+  atomic
+};
