@@ -10,7 +10,7 @@ class COMPONENTNAME extends React.Component {
   render() {
     return (
       <div>
-        <COMPONENTNAME />
+        <h1>COMPONENTNAME</h1>
       </div>
     );
   }
