@@ -11,6 +11,7 @@
 /build
 /output
 /src
+/data
 
 # misc
 .DS_Store
