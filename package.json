@@ -16,9 +16,12 @@
     "chalk": "^2.3.2",
     "figlet": "^1.2.0",
     "fs-extra": "^5.0.0",
-    "inquirer": "^5.1.0"
+    "inquirer": "^5.1.0",
+    "js-yaml": "^3.11.0",
+    "lodash": "^4.17.5"
   },
   "atomic-react-cli": {
+    "design-token" : "data/example.yml",
     "componentsDir": "src/components"
   },
   "devDependencies": {

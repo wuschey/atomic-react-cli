@@ -3,9 +3,11 @@ const inquirer = require("inquirer");
 const chalk = require("chalk");
 const figlet = require("figlet");
 const path = require("path");
+const _ = require("lodash");
+const yamltoJSObject = require('./yamltojson');
 
 const questions = require("./questions");
-const {PATH, TEMPLATES} = require("./config");
+const {PATH, TEMPLATES, YAML_PATH, JSON_OUTPUT} = require("./config");
 
 const log = console.log;
 let config = {};
@@ -15,23 +17,33 @@ const setConfig = obj => {
     atomicType: obj.atomicType,
     componentType: obj.componentType,
     componentName: obj.componentName,
-    outputFolder: PATH[obj.atomicType]
+    outputFolder: PATH[obj.atomicType],
+    updateDesignToken: obj.updateDesignToken
   };
 };
 
 const atomic = () => {
-  figlet("Atomic React Components", (err, data) => {
-    log(data);
-    inquirer
-      .prompt(questions)
-      .then(answers => {
-        config = setConfig(answers);
 
-        // console.log(config);
-
-        checkIfComponentExists();
-      });
+  let token = false;
+  _.forOwn(process.argv, (key, val) => {
+    if (key == 'token') {
+      console.log(JSON_OUTPUT);
+      yamltoJSObject(TEMPLATES.token, YAML_PATH, JSON_OUTPUT);
+      token = true;
+    }
   });
+
+  if (!token) {
+    figlet("Atomic React Components", (err, data) => {
+      log(data);
+      inquirer
+        .prompt(questions)
+        .then(answers => {
+          config = setConfig(answers);
+          checkIfComponentExists();
+        });
+    });
+  }
 };
 
 /* Check if Component already exists*/
@@ -62,6 +74,7 @@ const createComponent = () => {
     .catch(err => {
       console.log(err);
     });
+
 };
 /* Write Component Files*/
 
@@ -70,6 +83,7 @@ const createProjectFiles = () => {
   writeComponentFile(".js", TEMPLATES[config.componentType]);
   writeComponentFile(".stories.js", TEMPLATES.storybook);
   writeComponentFile(".test.js", TEMPLATES.snapshot);
+
 };
 
 const writeComponentFile = (fileType, componentTemplate) => {
