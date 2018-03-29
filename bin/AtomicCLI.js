@@ -27,7 +27,6 @@ const atomic = () => {
   let token = false;
   _.forOwn(process.argv, (key, val) => {
     if (key == 'token') {
-      console.log(JSON_OUTPUT);
       yamltoJSObject(TEMPLATES.token, YAML_PATH, JSON_OUTPUT);
       token = true;
     }

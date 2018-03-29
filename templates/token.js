@@ -1,1 +1,3 @@
-export const PALETTE = PALETTE_OBJ
+module.exports = (tokenObj) =>{
+    return `export const PALETTE = ${tokenObj}`
+}
