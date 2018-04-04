@@ -77,7 +77,6 @@ const createComponent = () => {
 /* Write Component Files*/
 
 const createProjectFiles = () => {
-  console.log(createProjectFiles);
   writeComponentFile(".js", TEMPLATES.index);
   writeComponentFile(".js", TEMPLATES[config.componentType]);
   writeComponentFile(".stories.js", TEMPLATES.storybook);

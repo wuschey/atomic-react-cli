@@ -8,7 +8,7 @@ See [Atomic Design Documentation]  for further Information about this approach.
 
 # Todo
 
-- [ ] Add Design Token Support
+- [ x ] Add Design Token Support
 - [ ] Extend Templates (props)
 - [ ] Adding Project Type (Normal vs. DDD)
 - [ ] Test
