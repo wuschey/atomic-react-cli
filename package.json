@@ -1,10 +1,10 @@
 {
   "name": "atomic-react-cli",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "CLI Tool for React Components in Atomic Design",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "bin": {
     "atomic-react": "bin/index.js"
@@ -16,13 +16,19 @@
     "chalk": "^2.3.2",
     "figlet": "^1.2.0",
     "fs-extra": "^5.0.0",
-    "inquirer": "^5.1.0"
+    "inquirer": "^5.1.0",
+    "js-yaml": "^3.11.0",
+    "lodash": "^4.17.5"
   },
   "atomic-react-cli": {
+    "design-token": "data/example.yml",
     "componentsDir": "src/components"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1"
+    "babel-preset-env": "^1.6.1",
+    "eslint": "^4.19.1",
+    "eslint-config-google": "^0.9.1",
+    "jest": "^22.4.3"
   }
 }

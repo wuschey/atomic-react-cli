@@ -1,5 +1,10 @@
 const questions = [
     {
+        type: "confirm",
+        name: "updateDesignToken",
+        message : "Update Design-Token?"
+    },
+    {
         type: 'list',
         name: 'atomicType',
         message: 'What type of Component do you need?',

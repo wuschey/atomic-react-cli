@@ -1,4 +1,5 @@
-import React from 'react';
+module.exports = componentName => {
+return `import React from 'react';
 import renderer from 'react-test-renderer';
 
 import COMPONENTNAME from './COMPONENTNAME';
@@ -9,3 +10,5 @@ describe('Renders COMPONENTNAME', () => {
     expect(tree).toMatchSnapshot();
   });
 });
+`;
+};
