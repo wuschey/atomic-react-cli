@@ -14,6 +14,20 @@ See [Atomic Design Documentation]  for further Information about this approach.
 - [ ] Test
 - [ ] DocumentationJS
 
+
+# Design Token support
+
+```js
+ "atomic-react-cli": {
+    "design-token": "data/example.yml",
+  },
+```
+
+```js
+node bin/index.js token
+```
+
+
 # License
 
 MIT © Aminata Sidibe
