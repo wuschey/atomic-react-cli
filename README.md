@@ -27,6 +27,9 @@ See [Atomic Design Documentation]  for further Information about this approach.
 node bin/index.js token
 ```
 
+# Version
+0.1.0 Initial Commit for Scaffolding
+0.2.0 Basic Implementation of Design Token
 
 # License
 
