@@ -4,10 +4,10 @@ const chalk = require("chalk");
 const figlet = require("figlet");
 const path = require("path");
 const _ = require("lodash");
-const yamltoJSObject = require('./yamltojson');
+const yamltoJSObject = require("./yamltojson");
 
 const questions = require("./questions");
-const {PATH, TEMPLATES, YAML_PATH, JSON_OUTPUT} = require("./config");
+const { PATH, TEMPLATES, YAML_PATH, JSON_OUTPUT } = require("./config");
 
 const log = console.log;
 let config = {};
@@ -23,10 +23,9 @@ const setConfig = obj => {
 };
 
 const atomic = () => {
-
   let token = false;
   _.forOwn(process.argv, (key, val) => {
-    if (key == 'token') {
+    if (key == "token") {
       yamltoJSObject(TEMPLATES.token, YAML_PATH, JSON_OUTPUT);
       token = true;
     }
@@ -35,12 +34,10 @@ const atomic = () => {
   if (!token) {
     figlet("Atomic React Components", (err, data) => {
       log(data);
-      inquirer
-        .prompt(questions)
-        .then(answers => {
-          config = setConfig(answers);
-          checkIfComponentExists();
-        });
+      inquirer.prompt(questions).then(answers => {
+        config = setConfig(answers);
+        checkIfComponentExists();
+      });
     });
   }
 };
@@ -51,15 +48,17 @@ const checkIfComponentExists = () => {
   const dir = config.outputFolder;
   const componentDir = dir + "/" + config.componentName;
 
-  fs
-    .pathExists(componentDir)
-    .then(exists => {
-      if (!exists) {
-        createComponent();
-      } else {
-        log(chalk.bgRed.white.bold("Component already exists - Please use another component name"));
-      }
-    });
+  fs.pathExists(componentDir).then(exists => {
+    if (!exists) {
+      createComponent();
+    } else {
+      log(
+        chalk.bgRed.white.bold(
+          "Component already exists - Please use another component name"
+        )
+      );
+    }
+  });
 };
 
 const createComponent = () => {
@@ -72,35 +71,40 @@ const createComponent = () => {
     })
     .catch(err => {
       console.log(err);
+      return false;
     });
-
 };
 /* Write Component Files*/
 
 const createProjectFiles = () => {
+  console.log(createProjectFiles);
   writeComponentFile(".js", TEMPLATES.index);
   writeComponentFile(".js", TEMPLATES[config.componentType]);
   writeComponentFile(".stories.js", TEMPLATES.storybook);
   writeComponentFile(".test.js", TEMPLATES.snapshot);
-
 };
 
-const writeComponentFile = (fileType, componentTemplate) => {
+const writeComponentFile = (fileType, templateName) => {
   let componentDir = config.outputFolder;
   let componentName = config.componentName;
   let filename = config.componentName;
 
-  if (componentTemplate == TEMPLATES.index) 
-    filename = "index";
-  
-  const outputFile = componentDir + "/" + componentName + "/" + filename + fileType;
+  if (templateName == TEMPLATES.index) filename = "index";
 
-  fs.readFile(componentTemplate, "utf8", (err, data) => {
-    const result = data.replace(/COMPONENTNAME/g, componentName);
-    fs.outputFile(outputFile, result, "utf8", err => {});
+  const outputFile =
+    componentDir + "/" + componentName + "/" + filename + fileType;
+
+  const componentTemplate = require(templateName);
+
+  const templateString = componentTemplate(componentName);
+ 
+   fs.outputFile(outputFile, templateString, err => {
+    if (err) throw err;
+    console.log(chalk.green.bold("File " + outputFile + " was created"));
   });
 };
 
 module.exports = {
-  atomic
+  atomic,
+  createComponent
 };

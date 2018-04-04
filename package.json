@@ -4,7 +4,7 @@
   "description": "CLI Tool for React Components in Atomic Design",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "bin": {
     "atomic-react": "bin/index.js"
@@ -21,11 +21,14 @@
     "lodash": "^4.17.5"
   },
   "atomic-react-cli": {
-    "design-token" : "data/example.yml",
+    "design-token": "data/example.yml",
     "componentsDir": "src/components"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1"
+    "babel-preset-env": "^1.6.1",
+    "eslint": "^4.19.1",
+    "eslint-config-google": "^0.9.1",
+    "jest": "^22.4.3"
   }
 }
